@@ -10,7 +10,11 @@ public class Main {
 		
 		Scanner in = new Scanner(file);
 		
-		HashMap<String, String> map = new HashMap<String, String>();
+		/*
+		 * Data Structure is a map where the key is the variable name
+		 * and the value is a String array containing the current value and the data type of said variable.
+		 */
+		HashMap<String, String[]> map = new HashMap<String, String[]>();
 		
 		while (in.hasNext()) {
 			String data = in.nextLine();
@@ -18,8 +22,17 @@ public class Main {
 			
 			for (int i = 0; i < arr.length; i++) {
 				
+				// find data type and store key:value pair with data type
 				if (arr[i].equals("=")) {
-					map.put(arr[i-1], arr[i+1]);
+					
+					if (arr[i+1].contains("\"")) { // string
+						map.put(arr[i-1], new String[] {arr[i+1], "String"});
+					}
+					
+					else { // int
+						map.put(arr[i-1], new String[] {arr[i+1], "Int"});
+					}
+					
 				}
 				
 				else if (arr[i].equals("*=")) {
